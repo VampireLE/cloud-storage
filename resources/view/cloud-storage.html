@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/cloud_storage/resources/css/cloud-storage.css">
+</head>
+<body>
+    <section>
+        <div class="fixed-container">
+            <div class="container">
+                <div class="navigation">
+                    <div class="navigation-fixed-container">
+                        <form class="form-navigation" action="" method="POST" enctype="multipart/form-data">
+                            <input type="file" placeholder="Загрузить" name="uploadFiles">
+                            <input type="submit" placeholder="Отправить">
+                        </form>
+                        <input type="text" placeholder="Создать папку">
+                    </div>
+                </div>
+                <hr>
+                <div class="content">
+                    <div class="bar-manipulation">
+                        <div class="bar-side-left">
+                            <div class="filename"></div>
+                        </div>
+                        <div class="bar-side-right">
+                            <form action="/src/Controllers/ShareController.php" method="POST">
+                                <input id="shareFile" type="submit" name="shareFile" value="Share">
+                                <p id="link-on-file" style="display: none;"></p>
+                            </form>
+                            <form action="deleteChoiceBar.php" method="POST" id="deleteFile">
+                                <input type="submit" name="deleteChoiceFile" value="Delete">
+                            </form>
+                            <form action="">
+                                <input type="submit" name="downloadFile" value="Download">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="content-fixed-container" id="file-list">
+                        Пусто
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="/../cloud_storage/resources/js/cloud-storage.js"></script>
+</body>
+</html>

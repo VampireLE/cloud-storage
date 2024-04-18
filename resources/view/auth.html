@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="/cloud_storage/resources/css/auth.css">
+</head>
+<body>
+    <section class="section-authorization">
+        <div class="authorisation">
+            <form class="form-authorization" action="/cloud_storage/src/Controllers/UsersController.php" method="POST">
+                <div class="sign-in">
+                    <h2>Sign in</h2>
+                    <input type="login" placeholder="Input login" name="sign-in[login]"">
+                    <input type="password" placeholder="Input password" name="sign-in[password]">
+                    <button>Sign in</button>
+                </div>
+            </form>
+            <form class="form-registration" action="/cloud_storage/src/Controllers/RegistrationController.php" method="POST">
+                <div class="sign-up">
+                    <h2>Sign up</h2>
+                    <input type="login" placeholder="Input login" name="sign-up[login]">
+                    <input type="password" placeholder="Input password" name="sign-up[password]">
+                    <input type="password" placeholder="Confirm password" name="sign-up[confirm_password]">
+                    <button>Sign up</button>
+                </div>
+            </form>
+            <div class="choice-auth">
+                <img class="img-login active" src="/cloud_storage/img/login.png" alt="#">
+                <img class="img-sign-up" src="/cloud_storage/img/register.png" alt="#">
+            </div>
+        </div>
+    </section>
+    <script src="/cloud_storage/resources/js/auth.js"></script>
+</body>
+</html>

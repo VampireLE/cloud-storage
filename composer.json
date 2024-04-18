@@ -1,0 +1,19 @@
+{
+    "name": "app/cloud_storage",
+    "description": "cloud storage",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\CloudStorage\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Georgii Kostin",
+            "email": "egor_kostin_1999@mail.ru"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
