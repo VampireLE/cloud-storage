@@ -11,27 +11,38 @@ function shortenFileName(fileName, maxLength = 16) {
 }
 
 function addListFile(fullFileName) {
-    console.log(fullFileName);
-    fetch('/cloud_storage/src/Controllers/ShareController.php', {
-        method: 'POST',
-        body: fullFileName,
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok. Status: ' + response.status);
+    document.getElementById('shareFile').addEventListener('click', function (e) {
+        e.preventDefault();
+        // console.log(fullFileName);
+        fetch('/cloud_storage/src/Controllers/ShareController.php', {
+            method: 'POST',
+            body: fullFileName,
+            headers: {
+                'Content-Type': 'application/json'
             }
-            return response.json();
         })
-        .then(data => {
-            console.log(data['path']);
-        })
-        .catch(error => {
-            console.error('Проблема с запросом:', error);
-        });
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok. Status: ' + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                writeValue = document.createElement('input');
+                writeValue.value = 'https://localhost/cloud_storage/storage/share/' + data['share'];
+                document.body.appendChild(writeValue);
+                writeValue.select();
+                document.execCommand('copy');
+                alert('В буффер обмена была скопирована ссылка на файл');
+                writeValue.remove();
+            })
+            .catch(error => {
+                console.error('Проблема с запросом:', error);
+            });
+    })
+
 }
+
 
 
 
@@ -87,21 +98,22 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    document.getElementById('shareFile').addEventListener('click', function (e) {
-        e.preventDefault();
-        fetch('/cloud_storage/src/Controller/ShareController.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/text/plain'
-            }
-                .then(responce => responce.text())
-                .then(data => {
-                    console.log(data)
-                })
-    })
-})
+    // document.getElementById('shareFile').addEventListener('click', function (e) {
+    //     //отменяем стандартную обработку кнопки
+    //     e.preventDefault();
+    //     writeValue = document.createElement('input');
+    //     writeValue.value = 123;
+    //     document.body.appendChild(writeValue);
+    //     writeValue.select();
+    //     document.execCommand('copy');
+    //     alert('click');
+    //     writeValue.remove();
+    // })
 
-    // document.getElementById('shareFile').addEventListener('click', function(e) {
+    // document.getElementById('shareFile').addEventListener('click', function (e) {
+    //     e.preventDefault();
+    // })
+
     //     e.preventDefault();
     //     fetch('/cloud_storage/src/Controllers/ShareController.php', {
     //         method: 'POST',
@@ -113,14 +125,14 @@ document.addEventListener('DOMContentLoaded', function () {
     //         .then(data => {
     //             console.log(data);
     //         })
-        // const linkCopy = document.querySelector('.filename').textContent;
-        // const tempInput = document.createElement('input');
-        // tempInput.style = 'position: absolute; left: -1000px; top: -1000px';
-        // tempInput.value = linkCopy;
-        // document.body.appendChild(tempInput);
-        // tempInput.select();
-        // document.execCommand('copy');
-        // document.body.removeChild(tempInput);
-        // alert('Слово "' + linkCopy + '" было скопировано в буфер обмена');
-    });
+    // const linkCopy = document.querySelector('.filename').textContent;
+    // const tempInput = document.createElement('input');
+    // tempInput.style = 'position: absolute; left: -1000px; top: -1000px';
+    // tempInput.value = linkCopy;
+    // document.body.appendChild(tempInput);
+    // tempInput.select();
+    // document.execCommand('copy');
+    // document.body.removeChild(tempInput);
+    // alert('Слово "' + linkCopy + '" было скопировано в буфер обмена');
+});
 // });

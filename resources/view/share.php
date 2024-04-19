@@ -5,9 +5,9 @@ $request = $_SERVER['REQUEST_URI'];
 $requestCut = explode('/', $request);
 $connectionToDataBase = new Users();
 $result = (Users::getPathFromLink($requestCut[4]));
-$path = $result[0]['path'];
+$path = $result['path'];
 $path = explode('/', $path);
-$fileName = $path[5]; 
+$fileName = $path[5];
 
 ?>
 
@@ -82,22 +82,37 @@ $fileName = $path[5];
         <div class="container">
             <div class="file-container">
                 <img src="/cloud_storage/img/file.png" alt="ShareFile">
-                <p class="nameFile"><?php echo $fileName ?></p>
+                <p class="nameFile"><?php  echo $fileName ?></p>
             </div>
-            <button>Download</button>
+            <button class="downloadFile">Download</button>
         </div>
     </section>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            //будем брать из скрипта php квери параметр в виде ссылки,
-            //получать из нее путь до файла и отображать название файла
-            //и передавать кнопке download в случае если она будет нажата скачивать файл на компьютер
-            fetch()
-            .then(responce => responce.text())
-            .then(data => {
 
-            });
+    <script>
+
+        document.querySelector('.downloadFile').addEventListener('click', function (e) {
+            e.preventDefault();
+            let url = window.location.href;
+            let getLastUri = (url.split('/')).pop();
+            fetch('/cloud_storage/src/Controllers/DownloadController.php', {
+                method: 'POST',
+                body: getLastUri
+            })
+            .then(respoce => respoce.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = '<?php echo $fileName; ?>';
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+            })
+            .catch(error => console.error('Ошибка при загрузке файла:', error));
         });
+
     </script>
 </body>
 </html>
