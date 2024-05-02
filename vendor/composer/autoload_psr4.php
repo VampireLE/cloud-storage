@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'App\\CloudStorage\\' => array($baseDir . '/src'),
+    'cloud_storage\\' => array($baseDir . '/'),
 );

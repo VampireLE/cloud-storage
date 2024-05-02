@@ -1,7 +1,11 @@
 <?php
 
-require_once __DIR__ . '/../Models/Users.php';
+namespace cloud_storage\src\Controllers;
 
+use cloud_storage\src\Models\Users;
+use Exception;
+
+require_once __DIR__ . '/../../vendor/autoload.php';
 class ShareController
 {
     public function getPath(string $nameFile, string $namePerson)
@@ -14,10 +18,11 @@ class ShareController
                 return $path . $file;
             }
         }
-        return false;
+        // return false;
+
     }
 
-    public function getLinkForFile()
+    public function getLinkForFile(): void
     {
         header('Content-Type: application/json; charset=utf-8');
 
@@ -31,9 +36,8 @@ class ShareController
             if ($path == false) {
                 echo 'Файл отсутствует';
             }
-    
             Users::generateAndSaveLink($namePerson, $path);
-            echo json_encode(Users::getLinkAndPath($namePerson));
+            echo json_encode(Users::getLink($namePerson, $path));
         } else {
             http_response_code(405);
             echo "Метод не поддерживается";

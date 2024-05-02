@@ -1,11 +1,12 @@
 <?php
 
-require_once '../../config/database.php';
-require_once __DIR__ . '/../Models/Users.php';
+namespace cloud_storage\src\Controllers;
 
+use cloud_storage\src\Models\Users;
+require_once __DIR__ . '/../../vendor/autoload.php';
 class RegistrationController
 {
-    public array $dataRegister = [];
+    public array $dataRegister = array();
 
     public function __construct()
     {
@@ -28,6 +29,11 @@ class RegistrationController
     {
         if (empty(($this->dataRegister)['login']) || empty(($this->dataRegister)['password']) || empty(($this->dataRegister)['confirm_password'])) {
             echo 'Одно из полей регистрации не заполнено';
+            return;
+        }
+
+        if (strlen($this->dataRegister['login']) < 10 || strlen($this->dataRegister['password']) < 10) {
+            echo 'Длина логина или пароля должна быть больше 10 символов';
             return;
         }
 

@@ -1,12 +1,17 @@
 <?php
 
-require_once '../../config/database.php';
-require_once __DIR__ . '/../Models/Users.php';
+
+namespace cloud_storage\src\Controllers;
+
+use cloud_storage\src\Models\Users;
+require_once '/xampp/htdocs/cloud_storage/vendor/autoload.php';
+
+
 
 // Поменять название файла и класса
 class UsersController
 {
-    public array $dataLogin = [];
+    public array $dataLogin = array();
 
     public function __construct()
     {

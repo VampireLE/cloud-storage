@@ -1,14 +1,21 @@
 <?php
-require_once __DIR__ . '/../../src/Models/Users.php';
+
+namespace cloud_storage\resources\view;
+/**
+ * requestCut переменная в которой лежит автогенерируемая ссылка
+ * $path путь до файла
+ * $result получаем имя файла
+ */
+use cloud_storage\src\Models\Users;
+require_once __DIR__ . '\\..\\..\\vendor\\autoload.php';
 
 $request = $_SERVER['REQUEST_URI'];
 $requestCut = explode('/', $request);
 $connectionToDataBase = new Users();
-$result = (Users::getPathFromLink($requestCut[4]));
-$path = $result['path'];
-$path = explode('/', $path);
-$fileName = $path[5];
 
+$path = (Users::getPathFromLink($requestCut[4]));
+$result = explode('/', $path);
+$fileName = $result[5];
 ?>
 
 <!DOCTYPE html>

@@ -1,5 +1,8 @@
 <?php
 
+namespace cloud_storage\src\Controllers;
+require_once __DIR__ . '/../../vendor/autoload.php';
+
 class StorageController
 {
     public function processRequest(): void

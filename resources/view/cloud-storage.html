@@ -12,11 +12,11 @@
             <div class="container">
                 <div class="navigation">
                     <div class="navigation-fixed-container">
-                        <form class="form-navigation" action="" method="POST" enctype="multipart/form-data">
-                            <input type="file" placeholder="Загрузить" name="uploadFiles">
-                            <input type="submit" placeholder="Отправить">
+                        <form class="form-navigation"  method="POST" id="uploadFiles">
+                            <label for="upload-files" class="upload">Upload</label>
+                            <input  type="file"  name="uploadFiles" id="upload-file">
+                            <input type="submit" value="Submit">
                         </form>
-                        <input type="text" placeholder="Создать папку">
                     </div>
                 </div>
                 <hr>
@@ -30,11 +30,11 @@
                                 <input id="shareFile" type="submit" name="shareFile" value="Share">
                                 <p id="link-on-file" style="display: none;"></p>
                             </form>
-                            <form action="deleteChoiceBar.php" method="POST" id="deleteFile">
+                            <form action="/src/Controllers/DeleteController.php" id="deleteFile">
                                 <input type="submit" name="deleteChoiceFile" value="Delete">
                             </form>
-                            <form action="">
-                                <input type="submit" name="downloadFile" value="Download">
+                            <form>
+                                <input type="submit" class="DownloadFile" name="downloadFile" value="Download">
                             </form>
                         </div>
                     </div>

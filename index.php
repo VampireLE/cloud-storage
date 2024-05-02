@@ -1,10 +1,13 @@
 <?php
 
-class Route
+namespace cloud_storage;
+
+
+class Index
 {
     private $request;
 
-    public function getUri()
+    public function getUri(): string
     {
         return $this->request = $_SERVER['REQUEST_URI'];
     }
@@ -24,6 +27,12 @@ class Route
             case '/cloud_storage/storage/':
                 require_once(__DIR__ . '/resources/view/cloud-storage.html');
                 break;
+            case '/cloud_storage/storage/uploadFile':
+                require_once(__DIR__ . '/src/Controllers/UploadController.php');
+                break;
+            // case '/cloud_storage/storage/share':
+            //     require_once(__DIR__ . '/src/Controllers/ShareController.php');
+            //     break;
             default:
                 if ($matches) {
                     require_once(__DIR__ . '/resources/view/share.php');
@@ -34,6 +43,6 @@ class Route
     }
 }
 
-$route = new Route;
+$route = new Index;
 $route->getUri();
 $route->routeToAddress();

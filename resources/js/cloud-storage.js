@@ -10,10 +10,13 @@ function shortenFileName(fileName, maxLength = 16) {
     return baseName.slice(0, availableLength) + '...' + fileExtension;
 }
 
-function addListFile(fullFileName) {
-    document.getElementById('shareFile').addEventListener('click', function (e) {
-        e.preventDefault();
-        // console.log(fullFileName);
+function shareBtnClick() {
+    document.getElementById('shareFile').addEventListener('click', (event) => {
+        event.preventDefault();
+
+        let getFileName = document.querySelector('.active-file');
+        let fullFileName = getFileName.getAttribute('data-fullname');
+
         fetch('/cloud_storage/src/Controllers/ShareController.php', {
             method: 'POST',
             body: fullFileName,
@@ -21,15 +24,10 @@ function addListFile(fullFileName) {
                 'Content-Type': 'application/json'
             }
         })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok. Status: ' + response.status);
-                }
-                return response.json();
-            })
+            .then(responce => responce.json())
             .then(data => {
                 writeValue = document.createElement('input');
-                writeValue.value = 'https://localhost/cloud_storage/storage/share/' + data['share'];
+                writeValue.value = 'https://localhost/cloud_storage/storage/share/' + data['link'];
                 document.body.appendChild(writeValue);
                 writeValue.select();
                 document.execCommand('copy');
@@ -37,18 +35,88 @@ function addListFile(fullFileName) {
                 writeValue.remove();
             })
             .catch(error => {
-                console.error('Проблема с запросом:', error);
+                console.log('Произошла ошибка с: ' + error);
             });
-    })
+    });
+}
 
+function deleteFile() {
+    document.getElementById('deleteFile').addEventListener('click', (event) => {
+        event.preventDefault();
+
+        const fileName = document.querySelector('.active-file').getAttribute('data-fullname');
+        fetch('/cloud_storage/src/Controllers/DeleteController.php', {
+            method: 'DELETE',
+            body: fileName,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Ошибка: ', error)
+            })
+    })
+}
+
+function downloadFile() {
+    document.querySelector('.DownloadFile').addEventListener('click', (event) => {
+        event.preventDefault(); //отменняет пееход на другую страницу
+
+        // Получаем полное название файла из data-fullname
+        let fileName = document.querySelector('.active-file').getAttribute('data-fullname');
+
+        fetch('/cloud_storage/src/Controllers/DownloadController.php', {
+            method: 'POST',
+            body: fileName,
+            headers: {
+                'Content-Type': 'text/plain'
+            }
+        })
+            .then(response => response.blob())
+            .then(data => {
+                const url = window.URL.createObjectURL(data);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = fileName;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                window.URL.revokeObjectURL(url);
+            });
+    });
 }
 
 
+function UploadFile() {
+    const formUploadFile = document.getElementById('uploadFiles');
+    formUploadFile.addEventListener('submit', (event) => {
+        event.preventDefault();
 
+        const file = (formUploadFile.querySelector('[type="file"]')).files[0];
+        const formatData = new FormData();
+        formatData.append('file', file);
 
-document.addEventListener('DOMContentLoaded', function () {
+        fetch('/cloud_storage/src/Controllers/UploadController.php', {
+            method: 'POST',
+            body: formatData
+        })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+            })
+    })
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    //load files
+
     fetch('/cloud_storage/src/Controllers/StorageController.php')
-        .then(response => response.json())
+        .then(responce => responce.json())
         .then(data => {
             const fileList = document.getElementById('file-list');
             fileList.innerHTML = '';
@@ -64,75 +132,33 @@ document.addEventListener('DOMContentLoaded', function () {
                 elementFile.appendChild(span);
                 fileList.appendChild(elementFile);
             });
-
+            //показываем бар
             const activeElements = document.querySelectorAll('.item-file');
             activeElements.forEach(element => {
                 element.addEventListener('click', function () {
-                    activeElements.forEach(el => el.style.backgroundColor = '');
-                    element.style.backgroundColor = 'rgb(188, 190, 192)';
-                    element.style.borderRadius = '10px';
+                    activeElements.forEach(el => el.classList.remove('active-file'));
+                    element.classList.add('active-file');
                     const barManipulation = document.querySelector('.bar-manipulation');
                     barManipulation.style.display = 'flex';
                     const nameFile = document.querySelector('.filename');
                     let fullFileName = element.getAttribute('data-fullname'); // Получаем полное имя файла
                     let shortenedFileName = shortenFileName(fullFileName); // Получаем сокращенное имя для отображения
                     nameFile.textContent = shortenedFileName; // Отображаем сокращенное имя в панели управления
-                    addListFile(fullFileName); // Вызываем функцию для обработки полного имени файла
                 });
+            });
+            shareBtnClick();
+            deleteFile();
+            downloadFile();
+
+            UploadFile();
+            let upload = document.querySelector('.upload');
+            let uploadFile = document.querySelector('#upload-file');
+
+            upload.addEventListener('click', () => {
+                uploadFile.click();
             });
         })
         .catch(error => {
-            console.error('Ошибка:', error);
+            console.error('Ошибка: ', error);
         });
-
-
-    document.addEventListener('click', function (event) {
-        const fileListElement = document.getElementById('file-list');
-        const barManipulation = document.querySelector('.bar-manipulation');
-        const isClickInsideBarManipulation = fileListElement.contains(event.target);
-        const isClickInsideFileList = barManipulation.contains(event.target);
-        if (!isClickInsideBarManipulation && !isClickInsideFileList) {
-            barManipulation.style.display = 'none';
-            const activeElements = document.querySelectorAll('.item-file');
-            activeElements.forEach(el => el.style.backgroundColor = '');
-        }
-    });
-
-    // document.getElementById('shareFile').addEventListener('click', function (e) {
-    //     //отменяем стандартную обработку кнопки
-    //     e.preventDefault();
-    //     writeValue = document.createElement('input');
-    //     writeValue.value = 123;
-    //     document.body.appendChild(writeValue);
-    //     writeValue.select();
-    //     document.execCommand('copy');
-    //     alert('click');
-    //     writeValue.remove();
-    // })
-
-    // document.getElementById('shareFile').addEventListener('click', function (e) {
-    //     e.preventDefault();
-    // })
-
-    //     e.preventDefault();
-    //     fetch('/cloud_storage/src/Controllers/ShareController.php', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'text/plain'
-    //         }
-    //     })
-    //         .then(response => response.text())
-    //         .then(data => {
-    //             console.log(data);
-    //         })
-    // const linkCopy = document.querySelector('.filename').textContent;
-    // const tempInput = document.createElement('input');
-    // tempInput.style = 'position: absolute; left: -1000px; top: -1000px';
-    // tempInput.value = linkCopy;
-    // document.body.appendChild(tempInput);
-    // tempInput.select();
-    // document.execCommand('copy');
-    // document.body.removeChild(tempInput);
-    // alert('Слово "' + linkCopy + '" было скопировано в буфер обмена');
 });
-// });

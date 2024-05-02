@@ -1,6 +1,7 @@
 * {
     padding: 0;
     margin: 0;
+    font-family: Arial, sans-serif;
 }
 
 body {
@@ -29,14 +30,62 @@ body {
 }
 
 .navigation {
+    margin-left: 30px;
     width: 300px;
-    display: flex;
-    justify-content: center;
-
 }
 
 .navigation-fixed-container {
     max-width: 260px;
+}
+
+.navigation input {
+    margin-top: 30px;
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    border: 0;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: rgba(24, 58, 230, 0.461);
+    color: black;
+}
+.navigation input:hover {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.navigation input:active {
+    margin-top: 25px;
+    border: 1px solid black;
+}
+
+.form-navigation {
+    margin-top: 60px;
+}
+
+#upload-file {
+    display: none;
+}
+
+.upload {
+    line-height: 40px;
+    text-align: center;
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: rgba(24, 58, 230, 0.461);
+    display: inline-block;
+    color: black;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.upload:hover {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.upload:active {
+    margin-top: -5px;
+    border: 1px solid black;
 }
 
 .content {
@@ -52,7 +101,7 @@ body {
     justify-content: space-between;
     align-items: center;
     position: absolute;
-    background-color: rgba(66, 90, 117, 0.987);
+    background-color: rgba(24, 58, 230, 0.461);
     width: 100%;
     height: 90px;
     border-radius: 10px;
@@ -68,6 +117,15 @@ body {
     font-size: 20px;
     cursor: pointer;
 
+}
+
+.bar-manipulation input:hover {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.bar-manipulation input:active {
+    margin-top: -5px;
+    border: 1px solid black;
 }
 
 .content-fixed-container {
@@ -97,14 +155,12 @@ body {
     align-items: center;
     width: 300px;
     height: 50px;
-}
-
-.filename p {
-    color: white;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .item-file {
+    width: 130px;
+    cursor: pointer;
     height: 100px;
     display: flex;
     flex-direction: column;
@@ -121,3 +177,7 @@ body {
     height: 60px;
 }
 
+.active-file {
+    background-color: rgb(188, 190, 192);
+    border-radius: 10px;
+}
