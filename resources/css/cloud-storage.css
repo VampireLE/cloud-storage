@@ -1,0 +1,307 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: rgb(235, 240, 255);
+}
+
+.cloud-is-clear {
+    display: none;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    border-radius: 10px;
+    width: 1850px;
+    height: 850px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navigation {
+    margin-left: 30px;
+    width: 300px;
+}
+
+.navigation-fixed-container {
+    max-width: 260px;
+}
+
+.navigation input {
+    margin-top: 30px;
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    border: 0;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: rgba(24, 58, 230, 0.461);
+    color: black;
+}
+.navigation input:hover {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.navigation input:active {
+    margin-top: 25px;
+    border: 1px solid black;
+}
+
+.form-navigation {
+    margin-top: 60px;
+}
+
+#upload-file {
+    display: none;
+}
+
+.upload {
+    line-height: 40px;
+    text-align: center;
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: rgba(24, 58, 230, 0.461);
+    display: inline-block;
+    color: black;
+    font-size: 20px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.upload:hover {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.upload:active {
+    margin-top: -5px;
+    border: 1px solid black;
+}
+
+.content {
+    width: 100%;
+    /* display: flex;
+    justify-content: flex-start; */
+    position: relative;
+}
+
+.bar-manipulation {
+    display: none;
+    gap: 50px;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    background-color: rgba(24, 58, 230, 0.461);
+    width: 100%;
+    height: 90px;
+    border-radius: 10px;
+}
+
+.bar-manipulation input {
+    height: 40px;
+    width: 250px;
+    background-color: white;
+    border-radius: 10px;
+    outline: none;
+    border: 0;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.bar-manipulation input:hover {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.bar-manipulation input:active {
+    margin-top: -5px;
+    border: 1px solid black;
+}
+
+.content-fixed-container {
+    max-width: 1500px;
+    margin: 100px 100px;
+    display: inline-flex;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.bar-side-left {
+    margin-left: 120px;
+    width: 180px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.bar-side-right {
+    margin-right: 20px;
+    display: flex;
+    gap: 30px;
+}
+
+.filename {
+    display: flex;
+    align-items: center;
+    width: 300px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.item-file {
+    width: 130px;
+    cursor: pointer;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.item-file span {
+    max-width: 90px;
+}
+
+.item-file img {
+    width: 60px;
+    height: 60px;
+}
+
+.active-file {
+    background-color: rgb(188, 190, 192);
+    border-radius: 10px;
+}
+
+/* Пагинация */
+
+.pagination {
+    position: absolute;
+    bottom: 20px;
+    left: 35%;
+    max-width: 500px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    
+}
+
+.pagination-pages {
+    display: flex;
+}
+
+.pagination-pages div {
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid black;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    margin: auto 10px;
+    font-size: 25px;
+}
+
+.pagination-before {
+    display: none;
+    border: 1px solid rgba(24, 58, 230, 0.461);
+    padding: 22px 22px;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.pagination-before::before {
+    content: '';
+    width: 20px;
+    height: 7px;
+    background-color: black;
+    border-radius: 10px;
+    position: absolute;
+    transform: rotate(-32deg);
+    top: 15px;
+    right: 13px;
+}
+
+.pagination-before::after {
+    content: '';
+    width: 20px;
+    height: 7px;
+    background-color: black;
+    border-radius: 10px;
+    position: absolute;
+    transform: rotate(32deg);
+    bottom: 15px;
+    right: 13px;
+}
+
+.pagination-after {
+    display: none;
+    border: 1px solid rgba(24, 58, 230, 0.461);
+    padding: 22px 22px;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.pagination-after::before {
+    content: '';
+    width: 20px;
+    height: 7px;
+    background-color: black;
+    border-radius: 10px;
+    position: absolute;
+    transform: rotate(-150deg);
+    top: 15px;
+    left: 13px;
+}
+
+.pagination-after::after {
+    content: '';
+    width: 20px;
+    height: 7px;
+    background-color: black;
+    border-radius: 10px;
+    position: absolute;
+    transform: rotate(150deg);
+    bottom: 15px;
+    left: 13px;
+}
+
+.active-page {
+    background-color: rgba(24, 58, 230, 0.461);
+}
+
+/* .pagination::before {
+    content: '';
+    position: absolute;
+    left: -60px;
+    background-color: black;
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+}
+
+.pagination::after {
+    content: '';
+    position: absolute;
+    right: -60px;
+    background-color: black;
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+} */

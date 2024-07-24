@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/App/resources/css/cloud-storage.css">
+</head>
+<body>
+    <section>
+        <div class="fixed-container">
+            <div class="container">
+                <div class="navigation">
+                    <div class="navigation-fixed-container">
+                        <form class="form-navigation"  method="POST" id="uploadFiles" enctype="multipart/form-data">
+                            <label for="upload-files" class="upload">Upload</label>
+                            <input  type="file"  name="uploadFiles" id="upload-file">
+                            <input type="submit" value="Submit">
+                        </form>
+                    </div>
+                </div>
+                <hr>
+                <div class="content">
+                    <div class="bar-manipulation">
+                        <div class="bar-side-left">
+                            <div class="filename"></div>
+                        </div>
+                        <div class="bar-side-right">
+                            <form action="/src/Controllers/ShareController.php" method="POST">
+                                <input id="shareFile" type="submit" name="shareFile" value="Share">
+                                <p id="link-on-file" style="display: none;"></p>
+                            </form>
+                            <form action="/src/Controllers/DeleteController.php" id="deleteFile">
+                                <input type="submit" name="deleteChoiceFile" value="Delete">
+                            </form>
+                            <form>
+                                <input type="submit" class="DownloadFile" name="downloadFile" value="Download">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="content-fixed-container" id="file-list">
+                    </div>
+                    <div class="pagination">
+                        <div class="pagination-before"></div>
+                        <div class="pagination-pages"></div>
+                        <div class="pagination-after"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="/../App/resources/js/cloud-storage.js"></script>
+</body>
+</html>
