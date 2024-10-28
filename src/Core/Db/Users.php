@@ -1,14 +1,14 @@
 <?php
 
-namespace App\src\Repositories;
+namespace App\src\Core\Db;
 
-use App\src\Core\RepositoryInterface;
-use App\Config\Database;
+use App\src\Core\Db\Database;
+use App\src\Core\Interface\RepositoryInterface;
 use PDO;
 
 class Users implements RepositoryInterface
 {
-    public $connect;
+    private $connect;
 
     public function __construct()
     {
@@ -34,11 +34,13 @@ class Users implements RepositoryInterface
 
     public function create(array $data): void
     {
-        $statement = $this->connect->prepare("INSERT INTO users (login, password) VALUES (:login, :password)");
-        $statement->execute([
-            ':login' => $data['login'],
-            ':password' => $data['password']
-        ]);
+        var_dump($data);
+        // $statement = $this->connect->prepare("INSERT INTO users (login, password, role_id) VALUES (:login, :password, :role_id)");
+        // $statement->execute([
+        //     ':login' => $data['login'],
+        //     ':password' => $data['password'],
+        //     ':role_id' => $data['role']
+        // ]);
     }
 
     public function get(array $data): array|string
@@ -48,19 +50,20 @@ class Users implements RepositoryInterface
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function update(array $data): void
+    public function update(array $data)
     {
-        $statement = $this->connect->prepare("UPDATE users SET login = :login, password = :password WHERE id = :id");
+        $statement = $this->connect->prepare("UPDATE users SET login = :login, password = :password, role_id = :role_id WHERE id = :id");
         $statement->execute([
             ':login' => $data['login'],
             ':password' => $data['password'],
+            ':role_id' => $data['role'],
             ':id' => $data['id']
         ]);
     }
 
-    public function delete(array $id): void
+    public function delete(array $data): void
     {
-        $statement = $this->connect->prepare("DELETE FROM users WHERE id = :id");
-        $statement->execute([':id' => $id]);
+        $statement = $this->connect->prepare("DELETE FROM users WHERE login = :login");
+        $statement->execute([':login' => $data['login']]);
     }
 }

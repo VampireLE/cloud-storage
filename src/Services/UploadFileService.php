@@ -1,32 +1,20 @@
 <?php
 
-namespace App\Src\Services;
+namespace App\src\Services;
 
 use App\src\Core\Setting;
-use App\Src\Repositories\{
+use App\src\Repositories\{
     Users,
     FileStorage
 };
 
 class UploadFileService
 {
-    /*
-    *   Получаем хедерсы, куки (логин пользователя), собираем в одно и отправляем в бд
-    *   имя файла, id пользователя чей файл. И отправить сам файл в папку files
-    */
+    private $storageRepository;
 
-    // public $response; 
-    // public $request;
-    // public function __construct(Response $response, Request $request)
-    // {
-    //     $this->request = $request;
-    //     $this->response = $response;
-    // }
-    public $storageRepository;
+    private object $userRepository;
 
-    public object $userRepository;
-
-    public function __construct($storageRepository, object $userRepository)
+    public function __construct(object $storageRepository, object $userRepository)
     {
         $this->storageRepository = $storageRepository;
         $this->userRepository = $userRepository;

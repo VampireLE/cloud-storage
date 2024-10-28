@@ -11,7 +11,7 @@ class Setting
         $this->configFile = require __DIR__ . '/../../config/config.php';
     }
 
-    public function get(string $key)
+    public function get(string $key): array|string
     {
         $keys = explode('.', $key);
         foreach ($keys as $k) {

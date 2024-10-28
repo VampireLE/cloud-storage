@@ -35,6 +35,9 @@ body {
 }
 
 .navigation-fixed-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     max-width: 260px;
 }
 
@@ -77,10 +80,7 @@ body {
     color: black;
     font-size: 20px;
     cursor: pointer;
-<<<<<<< HEAD
-=======
     user-select: none;
->>>>>>> master
 }
 
 .upload:hover {
@@ -120,10 +120,6 @@ body {
     border: 0;
     font-size: 20px;
     cursor: pointer;
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 }
 
 .bar-manipulation input:hover {
@@ -138,11 +134,7 @@ body {
 .content-fixed-container {
     max-width: 1500px;
     margin: 100px 100px;
-<<<<<<< HEAD
-    display: flex;
-=======
     display: inline-flex;
->>>>>>> master
     gap: 50px;
     flex-wrap: wrap;
 }
@@ -191,9 +183,6 @@ body {
 .active-file {
     background-color: rgb(188, 190, 192);
     border-radius: 10px;
-<<<<<<< HEAD
-}
-=======
 }
 
 /* Пагинация */
@@ -304,7 +293,7 @@ body {
     content: '';
     position: absolute;
     left: -60px;
-    background-color: black;
+    background-color: rgb(219, 209, 209);
     width: 60px;
     height: 60px;
     border-radius: 10px;
@@ -314,9 +303,8 @@ body {
     content: '';
     position: absolute;
     right: -60px;
-    background-color: black;
+    background-color: rgb(171, 158, 158);
     width: 60px;
     height: 60px;
     border-radius: 10px;
 } */
->>>>>>> master

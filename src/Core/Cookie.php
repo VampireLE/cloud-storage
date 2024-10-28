@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Src\Core;
+namespace App\src\Core;
 
 class Cookie
 {
-    public function setCookie(Request $request): void
+    public function setCookie(object $request): void
     {
         $getParams = ($request->getPostParams());
         $key = array_keys($getParams)[0];

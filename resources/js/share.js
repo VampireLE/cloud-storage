@@ -16,10 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelector('.downloadFile').addEventListener('click', (event) => {
         event.preventDefault();
-        
+        const nameFile = document.querySelector('.nameFile').innerHTML;
         fetch('/App/storage/download/', {
             method: 'POST',
-            body: uriLastLink
+            body: nameFile
         })
         .then(response => response.blob())
         .then(data => {

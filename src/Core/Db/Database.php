@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Config;
+namespace App\src\Core\Db;
 
 use App\src\Core\Setting;
 use PDO;
 
 class Database
 {
-    public static ?PDO $instance = null;
+    private static ?PDO $instance = null;
 
     public static function getInstance(): PDO
     {
@@ -16,8 +16,13 @@ class Database
 
         if (self::$instance === null) {
             try {
-                
-                self::$instance = new PDO("mysql:host=localhost;dbname=cloud_storage;charset=utf8", 'root', '');
+                self::$instance = new PDO(
+                    'mysql:host=' . $database['host'] . ';' .
+                    'dbname=' . $database['dbname'] . ';' .
+                    'charset=' . $database['charset'],
+                    $database['login'],
+                    $database['password']
+                );
             } catch (\PDOException $error) {
                 throw new \PDOException($error);
             }

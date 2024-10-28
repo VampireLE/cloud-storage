@@ -3,6 +3,7 @@
 return [
     'app' => [
         'database' => [
+            'host' => 'localhost',
             'dbname' => 'cloud_storage',
             'login' => 'root',
             'password' => '',

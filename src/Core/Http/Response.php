@@ -1,11 +1,13 @@
 <?php
 
-namespace App\src\Core;
+namespace App\src\Core\Http;
 
-class  Response
+class Response
 {
-    public string $body;
-    public $statusCode;
+    private string $body = '';
+    private $statusCode;
+
+    private array $headers = [];
 
     public function setBody(string $body = ''): void
     {
@@ -17,14 +19,20 @@ class  Response
         $this->statusCode = $code;
     }
 
-    public function addHeaders(string $header): void
+    public function addHeaders(string $header, string $value): void
     {
-        header($header);
+        $this->headers[$header] = $value;
     }
 
     public function send(): void
     {
         http_response_code($this->statusCode);
+        
+        if (!empty($this->headers)) {
+            foreach ($this->headers as $header => $value) {
+                header("$header: $value");
+            }
+        }
 
         if (!file_exists($this->body)) {
             echo $this->body;

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Src\Services;
+namespace App\src\Services;
 
 use App\src\Core\Setting;
 
 class DeleteFileService
 {
-    public $storageRepository;
+    private $storageRepository;
 
     public function __construct($storageRepository)
     {

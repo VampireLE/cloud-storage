@@ -1,12 +1,13 @@
 <?php
 
-namespace App\config;
+namespace App\src\Core;
 
-use App\src\Repositories\{
+use App\src\Core\Db\{
     FileStorage,
     Users
 };
-use App\Src\Services\{
+
+use App\src\Services\{
     DeleteFileService,
     DownloadFileService,
     FileService,
@@ -17,11 +18,11 @@ use App\Src\Services\{
     ShareFileService
 };
 
-class App
+class ServiceRegistry
 {
-    public static object $container;
+    private static object $container;
 
-    public static function registrationService(): void
+    public static function initializeServices(): void
     {
         self::$container = new ServiceContainer();
         self::$container->bind('auth', new UserService(new Users()));

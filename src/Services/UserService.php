@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Src\Services;
+namespace App\src\Services;
 
 use App\src\Core\Setting;
 
 class UserService
 {
-    public object $userRepositories;
+    private object $userRepositories;
 
     public function __construct(object $userRepositories)
     {
@@ -19,7 +19,7 @@ class UserService
             return 'Поле логина или пароля пустые';
         }
 
-        if (($this->userRepositories->get($data)) === false) {
+        if (($this->userRepositories->get($data)) === false || empty($this->userRepositories->get($data))) {
             return 'Данная учетная запись не существует';
         }
         return 'Авторизация прошла успешно';

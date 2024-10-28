@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/App/resources/css/admin-panel.css">
+</head>
+<body>
+    <div class="popup-container">
+        <div class="popup">
+            <form id="create-user-form">
+                <div class="close-btn"></div>
+                <p>Create user</p>
+                <input class="popup-input" type="text" placeholder="Input login" name="sign-up[login]" required>
+                
+                <input class="popup-input" type="password" placeholder="Input password" name="sign-up[password]" required>
+                <input class="popup-input" type="password" placeholder="Confirm password" name="sign-up[confirm_password]" required>
+                
+                <p>Administrator</p>
+                <div class="choice-administrator">
+                    <div class="choice-administrator-yes">
+                        <p>Yes</p>
+                        <input type="radio" name="role" id="admin-radio" value="admin">    
+                    </div>
+                    <div class="choce-administrator-no">
+                        <p>No</p>
+                        <input type="radio" name="role" id="user-radio" checked value="user">    
+                    </div>
+                </div>
+                <input class="create-new-user" type="submit" value="Create">
+            </div>
+        </form>
+    </div>
+    <section>
+        <div class="fixed-container">
+            <div class="container">
+                <div class="content">
+                    <button class="btn-create">Create</button>
+                    <div class="content-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Password</th>
+                                    <th>Role</th>
+                                    <th>Tools</th>
+                                </tr>
+                            </thead>
+                            <tbody class="show-users">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="edit-popup-container">
+            <div class="edit-popup">
+                <div class="edit-close-btn"></div>
+            </div>
+        </div>
+    </section>
+    
+    <script src="/App/resources/js/admin-panel.js"></script>
+</body>
+</html>
+

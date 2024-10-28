@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Src\Services;
+namespace App\src\Services;
 
 use App\src\Core\Setting;
 
 class FileService
 {
-    public $listFiles = array();
+    private $listFiles = array();
 
     public function getFiles(object $request): array
     {

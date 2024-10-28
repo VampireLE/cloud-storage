@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Src\Repositories;
+namespace App\src\Core\Db;
 
-use App\src\Core\RepositoryInterface;
-use App\Config\Database;
+use App\src\Core\Interface\RepositoryInterface;
+use App\src\Core\Db\Database;
 use Exception;
 use PDO;
 
 
 class FileStorage implements RepositoryInterface
 {
-    public $connect;
+    private $connect;
 
     public function __construct()
     {
@@ -91,7 +91,7 @@ class FileStorage implements RepositoryInterface
         }
     }
 
-    public function fileExists(array $data): string|array
+    public function fileExists(array $data)
     {
         try {
             $statement = $this->connect->prepare("SELECT nameFile FROM share_files WHERE nameFile = :nameFile");

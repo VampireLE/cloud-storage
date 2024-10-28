@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Src\Services;
+namespace App\src\Services;
 
 use App\src\Core\Setting;
-use App\src\Repositories\Users;
+
 
 class ShareService
 {
-    public object $storageRepository;
-    public object $userRepository;
+    private object $storageRepository;
+    private object $userRepository;
 
     public function __construct(object $storageRepository, object $userRepository)
     {
@@ -38,10 +38,8 @@ class ShareService
                 'nameFile' => $nameFile,
                 'userId' => $getId
             ]);
-    
-            return $generateLink;
         }
-        
+
         $this->storageRepository->update(['link' => $generateLink, 'nameFile' => $nameFile]);
         return $generateLink;
     }

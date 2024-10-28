@@ -6,7 +6,7 @@ use Exception;
 
 class ServiceContainer
 {
-    protected array $bindings = [];
+    private array $bindings = [];
 
     public function bind(string $id, $service): void
     {

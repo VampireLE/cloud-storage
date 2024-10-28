@@ -6,33 +6,32 @@ use App\src\Core\Setting;
 
 class DownloadFileService
 {
-    public $storageRepository;
+    private $storageRepository;
 
     public function __construct($storageRepository)
     {
         $this->storageRepository = $storageRepository;
     }
-    public function download(object $request): void
+    public function download(object $request, object $response): void
     {
         $setting = new Setting();
         $path = $setting->get('app.paths.files_path');
 
-        $link = file_get_contents('php://input');
-        
+        $nameFile = file_get_contents('php://input');
+
         $namePerson = explode('=', $request->getAllHeaders()['Cookie'])[1];
 
-        $file = $this->storageRepository->getFileName(['link' => $link]);
+        if (file_exists($path . '/' . $namePerson . '/' . $nameFile)) {
+            $response->addHeaders('Content-Description', 'File Transfer');
+            $response->addHeaders('Content-Type', 'application/octet-stream');
+            $response->addHeaders('Content-Disposition', 'attachment; filename="' . basename($path) . '"');
+            $response->addHeaders('Expires', '0');
+            $response->addHeaders('Cache-Control', 'must-revalidate');
+            $response->addHeaders('Pragma', 'public');
+            $response->addHeaders('Content-Length', (string)filesize($path . '/' . $namePerson . '/' . $nameFile));
 
-        if (file_exists($path . '/' . $namePerson . '/' . $file)) {
-            
-            header('Content-Description: File Transfer');
-            header('Content-Type: application/octet-stream');
-            header('Content-Disposition: attachment; filename="' . basename($path) . '"');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate');
-            header('Pragma: public');
-            header('Content-Length: ' . filesize($path));
-            readfile($path . '/' . $namePerson . '/' . $file);
+            $response->send();
+            readfile($path . '/' . $namePerson . '/' . $nameFile);
         }
     }
 }

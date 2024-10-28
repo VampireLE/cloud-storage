@@ -5,11 +5,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-<<<<<<< HEAD
-            "cloud_storage\\": ""
-=======
             "App\\": ""
->>>>>>> master
         }
     },
     "authors": [

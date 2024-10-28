@@ -2,7 +2,7 @@
 
 namespace App\src\Core;
 
-use App\src\Core\{
+use App\src\Core\Http\{
     Request,
     Response
 };
