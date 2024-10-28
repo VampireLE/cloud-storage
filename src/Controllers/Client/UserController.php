@@ -26,7 +26,6 @@ class UserController
 
     public function register(): void
     {
-        
         $register = $this->getService('register');
         $data = (($this->request->getPostParams())['sign-up']);
         $data['role'] = false;

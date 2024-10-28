@@ -1,19 +1,11 @@
 <?php
 
-namespace App\src\Controllers\Admin;
+namespace Src\Services\Admin\Entity;
 
-use App\src\Services\UserService;
 use App\src\Core\Db\Users;
 
-class UserController
+class EntityService
 {
-    private object $request;
-    private object $response;
-    public function __construct(object $request, object $response)
-    {
-        $this->request = $request;
-        $this->response = $response;
-    }
 
     public function showUsers()
     {
@@ -50,7 +42,7 @@ class UserController
         ]);
     }
 
-    public function delete(): void
+    public function delete()
     {
         $data = json_decode(file_get_contents('php://input'));
         $db = new Users();

@@ -8,7 +8,7 @@ class FilesController
 {
     private object $request;
     private object $response;
-    public function __construct($request, $response)
+    public function __construct(object $request, object $response)
     {
         $this->request = $request;
         $this->response = $response;
